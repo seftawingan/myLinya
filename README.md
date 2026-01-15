@@ -1,20 +1,26 @@
-# Expo Router and Tailwind CSS
+![myLinya Logo](./assets/myLinya.png)
 
-Use [Expo Router](https://docs.expo.dev/router/introduction/) with [Nativewind](https://www.nativewind.dev/v4/overview/) styling.
+# myLinya
 
-## Launch your own
+**Project name:** myLinya  
+**Tagline/motto:** Mas mabilis kapag may linya (myLinya)
 
-[![Launch with Expo](https://github.com/expo/examples/blob/master/.gh-assets/launch.svg?raw=true)](https://launch.expo.dev/?github=https://github.com/expo/examples/tree/master/with-tailwindcss)
+## Description
 
-## 🚀 How to use
+myLinya is a system that allows users to schedule online appointments, receive digital queueing numbers, and get real-time updates from government agencies and offices. It is designed to help citizens—especially vulnerable individuals like senior citizens and PWDs—avail of government services efficiently.
 
-```sh
-npx create-expo-app -e with-tailwindcss
-```
+With myLinya, services can be provided faster and conveniently as the system includes features such as the following:
 
-## Deploy
+### Key Features
 
-Deploy on all platforms with Expo Application Services (EAS).
+- **Online Appointment Scheduling**: Enables users to book appointments online, allowing them to select their preferred date and time.
 
-- Deploy the website: `npx eas-cli deploy` — [Learn more](https://docs.expo.dev/eas/hosting/get-started/)
-- Deploy on iOS and Android using: `npx eas-cli build` — [Learn more](https://expo.dev/eas)
+- **Digital Queueing**: Users will be informed of their position in the queue through numerical indicators after confirming an appointment.
+
+- **Real-time Updates and Processing**: Users are informed of any changes in time and schedule through constant updates.
+
+- **Service History**: Allows users to view records of previously availed services.
+
+- **First-come, first served Basis and Priority Assistance**: Queueing numbers are given in order of confirmed appointments. Senior citizens and persons with disabilities (PWDs) are given priority through a separate queue.
+
+- **Identity Verification**: Users are encouraged to upload valid ID for user authentication.

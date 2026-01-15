@@ -3,8 +3,44 @@ import { Slot } from "expo-router";
 
 import { Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
+import { supabase } from "./utils/supabase";
 import { Image, Link } from "@/tw";
+import { useState } from "react";
+
+
+export function Auth(){
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  async function signInWithEmail() {
+    setLoading(true)
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+    if (error) {
+      alert(error.message)
+    }
+    setLoading(false)
+  }
+  
+  async function signUpWithEmail() {
+    setLoading(true)
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp({
+      email,
+      password,
+    })
+    if (error) {
+      alert(error.message)
+    }
+    setLoading(false)
+  }
+}
+
 
 export default function Layout() {
   return (
