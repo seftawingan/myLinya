@@ -1,4 +1,4 @@
-![myLinya Logo]<img width="2455" height="1301" alt="myLinya" src="https://github.com/user-attachments/assets/de9e0527-13e6-44ac-899d-aa334ca8a31b" />
+<img width="2455" height="1301" alt="myLinya" src="https://github.com/user-attachments/assets/de9e0527-13e6-44ac-899d-aa334ca8a31b" />
 
 
 # myLinya
