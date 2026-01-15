@@ -26,7 +26,7 @@ function Header() {
           className="w-6 h-6 object-contain mr-2"
         />
         <Link className="font-bold flex-1 items-center justify-center" href="/">
-          ACME
+          myLinya
         </Link>
         <View className="flex flex-row gap-4 sm:gap-6">
           <Link
@@ -39,13 +39,13 @@ function Header() {
             className="text-md font-medium hover:underline web:underline-offset-4"
             href="/"
           >
-            Product
+            Appointments
           </Link>
           <Link
             className="text-md font-medium hover:underline web:underline-offset-4"
             href="/"
           >
-            Pricing
+            Team
           </Link>
         </View>
       </View>
@@ -62,7 +62,7 @@ function Footer() {
     >
       <View className="py-6 flex-1 items-start px-4 md:px-6 ">
         <Text className={"text-center text-gray-700"}>
-          © {new Date().getFullYear()} Me
+          © {new Date().getFullYear()} Team myLinya
         </Text>
       </View>
     </View>
