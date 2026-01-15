@@ -22,7 +22,7 @@ function Header() {
     <View style={{ paddingTop: top }}>
       <View className="px-4 lg:px-6 h-14 flex items-center flex-row">
         <Image
-          source="https://simpleicons.org/icons/expo.svg"
+          source={require("./assets/myLinya.png")}
           className="w-6 h-6 object-contain mr-2"
         />
         <Link className="font-bold flex-1 items-center justify-center" href="/">
