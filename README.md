@@ -1,4 +1,4 @@
-![myLinya Logo](./assets/myLinya.png)
+![myLinya Logo](src\app\assets\myLinya.png)
 
 # myLinya
 
