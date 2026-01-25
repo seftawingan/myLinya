@@ -1,58 +1,39 @@
 import "../global.css";
 import { Slot } from "expo-router";
-
 import { Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { supabase } from "./utils/supabase";
 import { Image, Link } from "@/tw";
-import { useState } from "react";
-
-
-export function Auth(){
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
-
-  async function signInWithEmail() {
-    setLoading(true)
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
-    if (error) {
-      alert(error.message)
-    }
-    setLoading(false)
-  }
-  
-  async function signUpWithEmail() {
-    setLoading(true)
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.signUp({
-      email,
-      password,
-    })
-    if (error) {
-      alert(error.message)
-    }
-    setLoading(false)
-  }
-}
-
+import { useState, useEffect } from "react";
+import supabase from "./Back-End/supabase";
+import type { Session } from "@supabase/supabase-js";
 
 export default function Layout() {
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   return (
     <View className="flex flex-1 bg-white">
-      <Header />
+      <Header session={session} />
       <Slot />
       <Footer />
     </View>
   );
 }
 
-function Header() {
+function Header({ session }: { session: Session | null }) {
   const { top } = useSafeAreaInsets();
   return (
     <View style={{ paddingTop: top }}>
@@ -82,6 +63,12 @@ function Header() {
             href="/"
           >
             Team
+          </Link>
+          <Link
+            className="text-md font-medium hover:underline web:underline-offset-4"
+            href="/account"
+          >
+            {session ? "Account" : "Login"}
           </Link>
         </View>
       </View>
