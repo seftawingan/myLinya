@@ -1,4 +1,5 @@
-import supabase from '../Back-End/supabase';
+
+import supabase from './supabase';
 
 export async function POST(request: Request) {
   const { action, email, password } = await request.json();
