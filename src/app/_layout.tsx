@@ -1,7 +1,7 @@
 import "../global.css";
 import { Slot } from "expo-router";
 
-import { Text, View } from "react-native";
+import { Text, View, Alert } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { supabase } from "./utils/supabase";
 import { Image, Link } from "@/tw";
@@ -20,7 +20,7 @@ export function Auth(){
       password,
     })
     if (error) {
-      alert(error.message)
+      Alert.alert('Error', error.message)
     }
     setLoading(false)
   }
@@ -35,7 +35,7 @@ export function Auth(){
       password,
     })
     if (error) {
-      alert(error.message)
+      Alert.alert('Error', error.message)
     }
     setLoading(false)
   }
