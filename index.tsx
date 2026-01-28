@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 
-import { Link } from "./src/app/frontend/components";  
+import { Link } from "./src/app/frontend/components/router";  
 import MainPage from "./src/app/frontend/components/mainPage";
 
 export default function Page() {

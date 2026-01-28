@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 
-import { Link } from ".";
+import { Link } from "./router";
 
 export default function Page() {
   return (
