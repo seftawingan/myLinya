@@ -30,3 +30,7 @@ export const useCSSVariable =
       };
 
 export { Image, ImageProps } from "./image";
+
+export default function () {
+  return null;
+}
