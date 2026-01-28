@@ -1,8 +1,8 @@
-import "../../styles/global.css";
+import "../styles/global.css";
 import { Slot } from "expo-router";
 import { Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Image, Link } from "../ui/tw";
+import { Image, Link } from ".";
 import { useState, useEffect } from "react";
 import supabase from "../../api/supabase";
 import type { Session } from "@supabase/supabase-js";
@@ -39,7 +39,7 @@ function Header({ session }: { session: Session | null }) {
     <View style={{ paddingTop: top }}>
       <View className="px-4 lg:px-6 h-14 flex items-center flex-row">
         <Image
-          source={require("../../../assets/myLinya.png")}
+          source={require("../../assets/myLinya.png")}
           className="w-6 h-6 object-contain mr-2"
         />
         <Link className="font-bold flex-1 items-center justify-center" href="/">

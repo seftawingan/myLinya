@@ -41,3 +41,7 @@ export const Image = (
 };
 
 Image.displayName = "CSS(Image)";
+
+export default function () {
+  return null;
+}

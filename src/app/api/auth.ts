@@ -32,3 +32,7 @@ export async function POST(request: Request) {
 
   return Response.json({ error: 'Invalid action' }, { status: 400 });
 }
+
+export default function () {
+  return null;
+}
