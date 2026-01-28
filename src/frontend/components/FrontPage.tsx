@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View } from "react-native";
 
-import { Link } from "@/tw";
+import { Link } from "../ui/tw";
 
 export default function Page() {
   return (
