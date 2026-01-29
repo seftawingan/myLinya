@@ -10,8 +10,10 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { FontAwesome, Ionicons } from '@expo/vector-icons'; // Standard with Expo
+import {useRouter} from 'expo-router';
 
-const LoginScreen: React.FC = () => {
+  const LoginScreen: React.FC = () => {
+  const router = useRouter();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -47,7 +49,9 @@ const LoginScreen: React.FC = () => {
             onChangeText={setPassword}
           />
           
-          <TouchableOpacity style={styles.forgotBtn}>
+          <TouchableOpacity 
+          onPress={() => router.push('/frontend/screen/signup')}
+          style={styles.forgotBtn}>
             <Text style={styles.forgotText}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
