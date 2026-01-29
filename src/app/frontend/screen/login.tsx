@@ -1,45 +1,60 @@
 import React, { useState } from 'react';
 import { 
-  StyleSheet, 
   Text, 
   View, 
   TextInput, 
   TouchableOpacity, 
-  SafeAreaView, 
-  Image 
+  Image,
+  Alert
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import { FontAwesome, Ionicons } from '@expo/vector-icons'; // Standard with Expo
+import { Ionicons } from '@expo/vector-icons';
+import supabase from '@/app/api/supabase';
 
 const LoginScreen: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
+  const handleLogin = async () => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      Alert.alert('Login Error', error.message);
+    } else {
+      Alert.alert('Login Success', 'You have been logged in!');
+      // Optionally navigate to another screen or update app state
+    }
+  };
+
   return (
     <LinearGradient
       colors={['#FF5291', '#FFFFFF']}
-      style={styles.container}
+      className="flex-1"
     >
-      <SafeAreaView style={styles.innerContainer}>
+      <SafeAreaView className="flex-1 items-center px-[30px]">
         
         {/* Logo Section */}
-        <View style={styles.logoContainer}>
-          <Text style={styles.logoText}>My Linya</Text>
+        <View className="mt-[60px] mb-[40px]">
+          <Text className="text-[48px] font-bold text-white italic" style={{textShadowColor: 'rgba(0, 0, 0, 0.2)', textShadowOffset: { width: 1, height: 2 }, textShadowRadius: 3,}}>My Linya</Text>
         </View>
 
-        <Text style={styles.headerTitle}>LOGIN</Text>
+        <Text className="text-[28px] font-extrabold text-white mb-[20px] tracking-wide">LOGIN</Text>
 
         {/* Input Fields */}
-        <View style={styles.inputWrapper}>
+        <View className="w-full">
           <TextInput
-            style={styles.input}
+            className="bg-[#FF76A8] h-[50px] rounded-[5px] px-[15px] mb-[15px] text-white border border-white/50"
             placeholder="Enter your Email"
             placeholderTextColor="white"
             value={email}
             onChangeText={setEmail}
           />
           <TextInput
-            style={styles.input}
+            className="bg-[#FF76A8] h-[50px] rounded-[5px] px-[15px] mb-[15px] text-white border border-white/50"
             placeholder="Enter Your Password"
             placeholderTextColor="white"
             secureTextEntry
@@ -47,41 +62,41 @@ const LoginScreen: React.FC = () => {
             onChangeText={setPassword}
           />
           
-          <TouchableOpacity style={styles.forgotBtn}>
-            <Text style={styles.forgotText}>Forgot Password?</Text>
+          <TouchableOpacity className="self-end">
+            <Text className="text-[#666] text-[12px]">Forgot Password?</Text>
           </TouchableOpacity>
         </View>
 
         {/* Login Button */}
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginBtnText}>LOGIN</Text>
+        <TouchableOpacity className="bg-[#FF5291] w-[60%] h-[50px] rounded-[25px] justify-center items-center mt-[30px]" style={{elevation: 5, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.25, shadowRadius: 3.84,}} onPress={handleLogin}>
+          <Text className="text-white text-[18px] font-bold">LOGIN</Text>
         </TouchableOpacity>
 
         {/* Divider */}
-        <View style={styles.dividerContainer}>
-          <View style={styles.line} />
-          <Text style={styles.dividerText}>Or Login with</Text>
-          <View style={styles.line} />
+        <View className="flex-row items-center my-[30px] w-full">
+          <View className="flex-1 h-[1px] bg-[#FFB6C1]" />
+          <Text className="mx-[10px] text-[#FF5291] text-[12px]">Or Login with</Text>
+          <View className="flex-1 h-[1px] bg-[#FFB6C1]" />
         </View>
 
         {/* Social Icons */}
-        <View style={styles.socialContainer}>
-          <TouchableOpacity style={styles.socialIcon}>
+        <View className="flex-row justify-center gap-[20px]">
+          <TouchableOpacity className="w-[50px] h-[50px] rounded-[25px] bg-white justify-center items-center" style={{elevation: 3, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.2, shadowRadius: 1.41,}}>
              <Ionicons name="logo-google" size={24} color="#DB4437" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.socialIcon}>
+          <TouchableOpacity className="w-[50px] h-[50px] rounded-[25px] bg-white justify-center items-center" style={{elevation: 3, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.2, shadowRadius: 1.41,}}>
              <Ionicons name="logo-facebook" size={24} color="#4267B2" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.socialIcon}>
+          <TouchableOpacity className="w-[50px] h-[50px] rounded-[25px] bg-white justify-center items-center" style={{elevation: 3, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.2, shadowRadius: 1.41,}}>
              <Ionicons name="mail" size={24} color="#EA4335" />
           </TouchableOpacity>
         </View>
 
         {/* Signup Link */}
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>Don't have an account? </Text>
+        <View className="flex-row mt-[40px]">
+          <Text className="text-[#666]">Don't have an account? </Text>
           <TouchableOpacity>
-            <Text style={styles.signupText}>Sign up</Text>
+            <Text className="text-[#FF5291] font-bold">Sign up</Text>
           </TouchableOpacity>
         </View>
 
@@ -89,120 +104,5 @@ const LoginScreen: React.FC = () => {
     </LinearGradient>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  innerContainer: {
-    flex: 1,
-    alignItems: 'center',
-    paddingHorizontal: 30,
-  },
-  logoContainer: {
-    marginTop: 60,
-    marginBottom: 40,
-  },
-  logoText: {
-    fontSize: 48,
-    fontWeight: 'bold',
-    color: 'white',
-    fontStyle: 'italic',
-    textShadowColor: 'rgba(0, 0, 0, 0.2)',
-    textShadowOffset: { width: 1, height: 2 },
-    textShadowRadius: 3,
-  },
-  headerTitle: {
-    fontSize: 28,
-    fontWeight: '800',
-    color: 'white',
-    marginBottom: 20,
-    letterSpacing: 1.5,
-  },
-  inputWrapper: {
-    width: '100%',
-  },
-  input: {
-    backgroundColor: '#FF76A8',
-    height: 50,
-    borderRadius: 5,
-    paddingHorizontal: 15,
-    marginBottom: 15,
-    color: 'white',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.5)',
-  },
-  forgotBtn: {
-    alignSelf: 'flex-end',
-  },
-  forgotText: {
-    color: '#666',
-    fontSize: 12,
-  },
-  loginBtn: {
-    backgroundColor: '#FF5291',
-    width: '60%',
-    height: 50,
-    borderRadius: 25,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 30,
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
-  loginBtnText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  dividerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 30,
-    width: '100%',
-  },
-  line: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#FFB6C1',
-  },
-  dividerText: {
-    marginHorizontal: 10,
-    color: '#FF5291',
-    fontSize: 12,
-  },
-  socialContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 20,
-  },
-  socialIcon: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-  },
-  footer: {
-    flexDirection: 'row',
-    marginTop: 40,
-  },
-  footerText: {
-    color: '#666',
-  },
-  signupText: {
-    color: '#FF5291',
-    fontWeight: 'bold',
-  },
-});
 
 export default LoginScreen;

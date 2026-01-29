@@ -66,7 +66,7 @@ function Header({ session }: { session: Session | null }) {
           </Link>
           <Link
             className="text-md font-medium hover:underline web:underline-offset-4"
-            href="/account"
+            href="./frontend/screen/login"
           >
             {session ? "Account" : "Login"}
           </Link>
