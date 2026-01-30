@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
+import supabase from '../../api/supabase';
 
 export default function SignupScreen() {
   const router = useRouter();
@@ -11,9 +12,10 @@ export default function SignupScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   // 2. All Logic functions must be above the return
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (!email || !password || !confirmPassword) {
       Alert.alert("Error", "Please fill in all fields");
       return;
@@ -24,8 +26,22 @@ export default function SignupScreen() {
       return;
     }
 
-    // If everything is correct, move to the ID Scan/Profile Setup
-    router.push('frontend/screen/accountsetup');
+    setLoading(true);
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+    setLoading(false);
+
+    if (error) {
+      Alert.alert("Signup Failed", error.message);
+      return;
+    }
+
+    if (data.user) {
+      // If everything is correct, move to the ID Scan/Profile Setup
+      router.push('frontend/screen/accountsetup');
+    }
   };
 
   // 3. The Return must be the VERY LAST thing in the function
@@ -67,8 +83,13 @@ export default function SignupScreen() {
         <TouchableOpacity 
           style={styles.signupBtn} 
           onPress={handleContinue}
+          disabled={loading}
         >
-          <Text style={styles.signupBtnText}>CONTINUE TO ACCOUNT SETUP</Text>
+          {loading ? (
+            <ActivityIndicator color="#FFF" />
+          ) : (
+            <Text style={styles.signupBtnText}>CONTINUE TO ACCOUNT SETUP</Text>
+          )}
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => router.back()} style={styles.footer}>

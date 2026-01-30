@@ -5,17 +5,41 @@ import {
   View, 
   TextInput, 
   TouchableOpacity, 
-  Image 
+  Image,
+  Alert,
+  ActivityIndicator
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons'; // Standard with Expo
 import {useRouter} from 'expo-router';
+import supabase from '../../api/supabase';
 
   const LoginScreen: React.FC = () => {
   const router = useRouter();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert('Error', 'Please fill in all fields');
+      return;
+    }
+
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    setLoading(false);
+
+    if (error) {
+      Alert.alert('Login Failed', error.message);
+    } else {
+      router.replace('/'); // Navigate to home or dashboard
+    }
+  };
 
   return (
     <LinearGradient
@@ -57,8 +81,12 @@ import {useRouter} from 'expo-router';
         </View>
 
         {/* Login Button */}
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginBtnText}>LOGIN</Text>
+        <TouchableOpacity style={styles.loginBtn} onPress={handleLogin} disabled={loading}>
+          {loading ? (
+            <ActivityIndicator color="#FFF" />
+          ) : (
+            <Text style={styles.loginBtnText}>LOGIN</Text>
+          )}
         </TouchableOpacity>
 
         {/* Divider */}
@@ -84,7 +112,7 @@ import {useRouter} from 'expo-router';
         {/* Signup Link */}
         <View style={styles.footer}>
           <Text style={styles.footerText}>Don't have an account? </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push('/frontend/screen/signup')}>
             <Text style={styles.signupText}>Sign up</Text>
           </TouchableOpacity>
         </View>
