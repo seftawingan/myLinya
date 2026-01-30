@@ -1,6 +1,5 @@
-import MainPage from "./frontend/components/mainPage";
-
+import { Redirect } from 'expo-router';
 
 export default function Page() {
-  return <MainPage />;
+  return <Redirect href="/(tabs)/home" />;
 }

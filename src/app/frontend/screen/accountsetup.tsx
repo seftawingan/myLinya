@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, ScrollView, Alert } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet,  ScrollView, Alert, Modal } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { Camera } from 'expo-camera';
 
 const AccountSetup: React.FC = () => {
   const router = useRouter();
   const [isIdScanned, setIsIdScanned] = useState(false);
+  const [hasPermission, setHasPermission] = useState<boolean | null>(null);
+  const [showCamera, setShowCamera] = useState(false);
 
   // Form States
   const [form, setForm] = useState({
@@ -13,10 +17,29 @@ const AccountSetup: React.FC = () => {
     mothersMaiden: '', phone: '', email: '', status: '', nationality: ''
   });
 
-  const handleScanID = () => {
-    Alert.alert("Camera", "Scanning National ID...", [
-      { text: "Simulate Success", onPress: () => setIsIdScanned(true) }
-    ]);
+  useEffect(() => {
+    (async () => {
+      const { status } = await Camera.requestCameraPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
+
+  const handleScanID = async () => {
+    if (hasPermission === null) {
+      Alert.alert("Camera Permission", "Requesting camera permission...");
+      return;
+    }
+    if (hasPermission === false) {
+      Alert.alert("Permission Denied", "Camera permission is required to scan your ID. Please enable it in your device settings.");
+      return;
+    }
+    setShowCamera(true);
+    // Simulate scanning
+    setTimeout(() => {
+      setIsIdScanned(true);
+      setShowCamera(false);
+      Alert.alert("Success", "ID Scanned Successfully!");
+    }, 3000); // Simulate a 3-second scan
   };
 
   const handleFinish = () => {
@@ -28,8 +51,28 @@ const AccountSetup: React.FC = () => {
     router.replace('/'); // Go back to login
   };
 
+  if (hasPermission === null) {
+    return <View style={styles.container}><Text style={styles.permissionText}>Requesting for camera permission...</Text></View>;
+  }
+  if (hasPermission === false) {
+    return <View style={styles.container}><Text style={styles.permissionText}>No access to camera. Please change this in settings.</Text></View>;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
+      <Modal
+        visible={showCamera}
+        transparent={false}
+        animationType="slide"
+        onRequestClose={() => setShowCamera(false)}
+      >
+        <Camera style={StyleSheet.absoluteFillObject} type="back">
+          <View style={styles.cameraOverlay}>
+            <Text style={styles.cameraText}>Position your ID within the frame</Text>
+          </View>
+        </Camera>
+      </Modal>
+
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}><Text style={styles.headerText}>MY LINYA</Text></View>
 
@@ -86,7 +129,10 @@ const styles = StyleSheet.create({
   input: { backgroundColor: '#FF69B4', borderRadius: 10, padding: 12, color: '#FFF', marginBottom: 10 },
   finishBtn: { backgroundColor: '#FF1493', width: '100%', padding: 15, borderRadius: 25, alignItems: 'center', marginTop: 10 },
   finishBtnText: { color: '#FFF', fontWeight: 'bold', fontSize: 16 },
-  disabledBtn: { backgroundColor: '#BDBDBD' }
+  disabledBtn: { backgroundColor: '#BDBDBD' },
+  permissionText: { color: '#FFF', textAlign: 'center', marginTop: 20 },
+  cameraOverlay: { flex: 1, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center' },
+  cameraText: { color: 'white', fontSize: 18, marginBottom: 20 }
 });
 
 export default AccountSetup;
