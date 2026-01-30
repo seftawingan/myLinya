@@ -5,11 +5,11 @@ import {
   View, 
   TextInput, 
   TouchableOpacity, 
-  SafeAreaView, 
   Image 
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import { FontAwesome, Ionicons } from '@expo/vector-icons'; // Standard with Expo
+import { Ionicons } from '@expo/vector-icons'; // Standard with Expo
 import {useRouter} from 'expo-router';
 
   const LoginScreen: React.FC = () => {
