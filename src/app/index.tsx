@@ -1,12 +1,5 @@
-import MainPage from "./frontend/components/mainPage";
-import SchedulingScreen from "./frontend/screen/scheduling";
-import QueueScreen from "./frontend/screen/queueing";
-
+import { Redirect } from 'expo-router';
 
 export default function Page() {
-  return <QueueScreen queueInfo={{
-    date: "2026-01-30",
-    queueNumber: 5,
-    appointmentTime: "14:30"
-  }} />;
+  return <Redirect href="/(tabs)/home" />;
 }
