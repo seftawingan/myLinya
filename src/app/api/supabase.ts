@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const supabaseUrl = 'https://dukvavnmyxsidgcsrjox.supabase.co';
-const supabasePublishableKey = 'sb_secret_4AT9ZL_2PazNmh_yut6_kA_BsEhWe84';
+const supabasePublishableKey = 'sb_publishable_XCGw0WgzoJM5Bx6m0JRLew_t-TsuuaN';
 
 export default createClient(supabaseUrl, supabasePublishableKey, {
   auth: {
