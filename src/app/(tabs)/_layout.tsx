@@ -8,7 +8,7 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false, // The header is already in the root layout
         tabBarStyle: {
-          height: 60,
+          height: 70,
           paddingBottom: 10,
         },
       }}> 
