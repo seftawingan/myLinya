@@ -15,7 +15,7 @@ export default function OfficesScreen() {
         style={styles.button1} 
         onPress={() => setIsModalVisible(true)}
       >
-        <Text style={styles.buttonText}>City Health Office</Text>
+        <Text style={styles.buttonText}>City Health Office (CHO)</Text>
       </TouchableOpacity>
 
       {/* City Social Welfare and Development Office Button */}
@@ -30,16 +30,32 @@ export default function OfficesScreen() {
       <Modal visible={modalVisible} animationType="slide" transparent={true} presentationStyle='pageSheet'>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>City Health Office</Text>
-            <Text style={styles.modalText}>Address: 123 Main St, Cityville</Text>
-            <Text style={styles.modalText}>Contact: (123) 456-7890</Text>
-            <Text style={[styles.modalText, { fontWeight: 'bold', marginTop: 10 }]}>Services:</Text>
-              <Text style={styles.modalText}>  • Health consultations</Text>
-              <Text style={styles.modalText}>  • Vaccinations</Text>
-              <Text style={styles.modalText}>  • Health education</Text>
+            <Text style={styles.modalTitle}>City Health Office (CHO)</Text>
+            <Text style={[styles.modalText, { fontStyle: 'italic', marginBottom: 10 }]}>*Brief Description*</Text>
+
+            <Text style={styles.modalText}>
+              <Text style={{ fontWeight: 'bold' }}>Address: </Text>123 Main St, Cityville
+            </Text>
+            
+            <Text style={styles.modalText}>
+              <Text style={{ fontWeight: 'bold' }}>Contact: </Text>(123) 456-7890
+            </Text>
+
+            <Text style={[styles.modalText, { fontWeight: 'bold', marginTop: 10 }]}>Programs and Services:</Text>
+            
+            <Text style={styles.modalText}>
+              <Text style={{ fontWeight: 'bold', fontStyle: 'italic' }}>  • Outpatient Consultation: </Text>
+              provides medical examinations and treatments to address health concerns and ensure residents receive necessary care (CHO, 2022).
+            </Text>
+            <Text style={styles.modalText}>
+              <Text style={{ fontWeight: 'bold', fontStyle: 'italic' }}>  • Health / Medical Certificate</Text>
+            </Text>
+
+            <Text style={[styles.modalText, { fontWeight: 'bold', marginTop: 10 }]}>Learn More</Text>
+            <Text style={styles.modalText}>City Health Office. (2022, February). CC-5E-CHO-Availing-of-Outpatient-Consultation-at-City-Health-Office [Brochure]. City Government of Naga. https://www2.naga.gov.ph/wp-content/uploads/2022/02/CC-5E-CHO-Availing-of-Outpatient-Consultation-at-City-Health-Office.pdf</Text>
 
             <TouchableOpacity 
-              style={styles.closeButton} 
+              style={[styles.closeButton, { alignSelf: 'center' }]} 
               onPress={() => setIsModalVisible(false)}
             >
               <Text style={styles.buttonText}>Close</Text>
@@ -53,14 +69,36 @@ export default function OfficesScreen() {
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>City Social Welfare and Development Office (CSWDO)</Text>
-            <Text style={styles.modalText}>Address: 456 Side St, Townsville</Text>
-            <Text style={styles.modalText}>Contact: (987) 654-3210</Text>
-            <Text style={[styles.modalText, { fontWeight: 'bold', marginTop: 10 }]}>Services:</Text>
-              <Text style={styles.modalText}>  • Assistance in Crisis Situations (AICS)</Text>
-              <Text style={styles.modalText}>  • Disaster Relief</Text>
+            <Text style={[styles.modalText, { fontStyle: 'italic', marginBottom: 10 }]}>*Brief Description*</Text>
+            
+            <Text style={styles.modalText}>
+              <Text style={{ fontWeight: 'bold' }}>Address: </Text>456 Side St, Townsville
+            </Text>
+            
+            <Text style={styles.modalText}>
+              <Text style={{ fontWeight: 'bold' }}>Contact: </Text>(987) 654-3210
+            </Text>
+
+            <Text style={[styles.modalText, { fontWeight: 'bold', marginTop: 10 }]}>Programs and Services:</Text>
+            
+            <Text style={[styles.modalText, { fontWeight: 'bold', fontStyle: 'italic' }]}>
+              1.1 Children and Youth Welfare Programs
+            </Text>
+            
+            <Text style={styles.modalText}>
+              <Text style={{ fontWeight: 'bold', fontStyle: 'italic' }}>  • SANGGAWADAN: </Text>
+              Provides support for underprivileged students and youth—including those living or working on the streets—to help them overcome financial barriers to education (CSWDO, 2022).
+            </Text>
+            
+            <Text style={styles.modalText}>
+              <Text style={{ fontWeight: 'bold', fontStyle: 'italic' }}>  • Early Childhood Care and Development</Text>
+            </Text>
+
+            <Text style={[styles.modalText, { fontWeight: 'bold', marginTop: 10 }]}>Learn More</Text>
+            <Text style={styles.modalText}>City Social Welfare and Development Office. (2022, February). CC-5E-CSWDO-Availing-the-SANGGAWADAN-Program [Brochure]. City Government of Naga. https://www2.naga.gov.ph/wp-content/uploads/2022/02/CC-5E-CSWDO-Availing-the-SANGGAWADAN-Program.pdf</Text>
             
             <TouchableOpacity 
-              style={styles.closeButton} 
+              style={[styles.closeButton, { alignSelf: 'center' }]} 
               onPress={() => setOtherModalVisible(false)}
             >
               <Text style={styles.buttonText}>Close</Text>

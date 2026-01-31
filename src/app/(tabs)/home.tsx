@@ -50,15 +50,15 @@ export default function HomePage() {
         {/* --- HEALTH SECTION --- */}
         <Text style={styles.sectionLabel}>Health</Text>
         <View style={styles.gridWrapper}>
-          {RenderSquareButton("Free Medical Consultation", "hand-holding-medical", "FA", "#36cc7a")}
+          {RenderSquareButton("Outpatient Consultation", "hand-holding-medical", "FA", "#36cc7a")}
           {RenderSquareButton("Service", "pills", "FA", "#36cc7a")}
           {RenderSquareButton("Service", "stethoscope", "FA", "#36cc7a")}
         </View>
 
         {/* --- HUMANITARIAN SECTION --- */}
-        <Text style={styles.sectionLabel}>Humanitarian Assistance</Text>
+        <Text style={styles.sectionLabel}>Children and Youth Welfare Program</Text>
         <View style={styles.gridWrapper}>
-          {RenderSquareButton("Assistance in Crisis Situations", "alert-circle-outline", "Material", "#4a90e2")}
+          {RenderSquareButton("SANGGAWADAN", "human", "Material", "#4a90e2")}
           {RenderSquareButton("Service", "utensils", "FA", "#4a90e2")}
           {RenderSquareButton("Service", "home", "FA", "#4a90e2")}
         </View>
